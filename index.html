@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solai ☀️ — Ventas con AI para negocios que quieren crecer</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a0a;color:#f0f0f0;overflow-x:hidden}
+a{color:#ffd700;text-decoration:none}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(255,215,0,0.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.sun{font-size:4em;margin-bottom:16px;animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);filter:drop-shadow(0 0 20px rgba(255,215,0,0.3))}50%{transform:scale(1.05);filter:drop-shadow(0 0 40px rgba(255,215,0,0.5))}}
+.hero h1{font-size:clamp(2.5em,6vw,4em);font-weight:800;background:linear-gradient(135deg,#ffd700,#ffaa00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.hero .tagline{font-size:clamp(1.1em,2.5vw,1.4em);color:#ccc;max-width:600px;margin-bottom:12px}
+.hero .sub{color:#888;font-size:1em;max-width:500px;margin-bottom:40px}
+.cta-btn{display:inline-block;background:linear-gradient(135deg,#ffd700,#ff8c00);color:#0a0a0a;font-weight:800;font-size:1.1em;padding:16px 48px;border-radius:50px;cursor:pointer;transition:all .3s;border:none;text-transform:uppercase;letter-spacing:1px}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,215,0,0.3)}
+
+/* Problem */
+.section{padding:80px 20px;max-width:900px;margin:0 auto}
+.section h2{font-size:2em;text-align:center;margin-bottom:40px;color:#ffd700}
+
+.problems{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px}
+.problem-card{background:#111;border:1px solid #222;border-radius:16px;padding:28px;text-align:center;transition:all .3s}
+.problem-card:hover{border-color:#ffd700;transform:translateY(-4px)}
+.problem-card .icon{font-size:2.5em;margin-bottom:12px}
+.problem-card h3{font-size:1.1em;margin-bottom:8px;color:#fff}
+.problem-card p{color:#888;font-size:.9em;line-height:1.5}
+
+/* Solution */
+.solution-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px}
+.solution-card{background:linear-gradient(135deg,#111 0%,#1a1a0a 100%);border:1px solid #333;border-radius:16px;padding:28px;position:relative;overflow:hidden}
+.solution-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#ffd700,#ff8c00)}
+.solution-card .step{color:#ffd700;font-weight:800;font-size:.85em;margin-bottom:8px}
+.solution-card h3{margin-bottom:8px}
+.solution-card p{color:#999;font-size:.9em;line-height:1.5}
+
+/* Results */
+.results{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-top:20px}
+.result-item{text-align:center}
+.result-item .number{font-size:3em;font-weight:800;color:#ffd700}
+.result-item .label{color:#888;font-size:.85em;margin-top:4px}
+
+/* Pricing */
+.pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.price-card{background:#111;border:1px solid #222;border-radius:16px;padding:32px;text-align:center;transition:all .3s}
+.price-card.featured{border-color:#ffd700;position:relative}
+.price-card.featured::after{content:'⭐ POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#ffd700;color:#0a0a0a;font-size:.7em;font-weight:800;padding:4px 16px;border-radius:20px}
+.price-card h3{font-size:1.2em;margin-bottom:4px}
+.price-card .price{font-size:2.5em;font-weight:800;color:#ffd700;margin:16px 0}
+.price-card .price span{font-size:.4em;color:#888}
+.price-card ul{list-style:none;text-align:left;margin:20px 0}
+.price-card li{padding:6px 0;color:#bbb;font-size:.9em}
+.price-card li::before{content:'✓ ';color:#ffd700}
+.price-card .cta-btn{width:100%;padding:14px;font-size:.95em}
+
+/* Form */
+.contact-form{max-width:500px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.contact-form input,.contact-form textarea,.contact-form select{background:#111;border:1px solid #333;color:#f0f0f0;padding:14px 18px;border-radius:12px;font-size:1em;font-family:inherit;outline:none;transition:border .3s}
+.contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{border-color:#ffd700}
+.contact-form textarea{resize:vertical;min-height:80px}
+.contact-form select option{background:#111}
+.form-success{display:none;text-align:center;padding:40px;color:#ffd700;font-size:1.2em}
+
+/* Footer */
+footer{text-align:center;padding:40px 20px;color:#444;font-size:.8em;border-top:1px solid #111}
+
+/* About */
+.about-box{background:#111;border:1px solid #222;border-radius:16px;padding:32px;max-width:600px;margin:0 auto;text-align:center}
+.about-box p{color:#bbb;line-height:1.7;font-size:.95em}
+.about-box .quote{font-style:italic;color:#ffd700;font-size:1.1em;margin:20px 0}
+
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:all .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="sun">☀️</div>
+  <h1>Solai</h1>
+  <div class="tagline">Ayudamos a los pequeños a ser grandes</div>
+  <div class="sub">Implementamos inteligencia artificial en tu proceso de ventas. Tú te enfocas en lo que sabes hacer — nosotros hacemos que vendas más.</div>
+  <a href="#contacto" class="cta-btn">Quiero vender más</a>
+</div>
+
+<div class="section reveal">
+  <h2>😩 ¿Te suena familiar?</h2>
+  <div class="problems">
+    <div class="problem-card">
+      <div class="icon">📱</div>
+      <h3>Leads que se enfrían</h3>
+      <p>Te escriben, pero no puedes responder a todos al instante. Cuando contestas, ya perdieron interés.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">🕐</div>
+      <h3>Seguimiento manual</h3>
+      <p>Recordar a quién escribirle, cuándo, por dónde... se te escapan ventas por falta de organización.</p>
+    </div>
+    <div class="problem-card">
+      <div class="icon">📊</div>
+      <h3>No sabes qué funciona</h3>
+      <p>¿Cuántos te escriben? ¿Cuántos compran? ¿Dónde pierdes gente? Sin datos, vendes a ciegas.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section reveal">
+  <h2>🚀 Lo que Solai hace por ti</h2>
+  <div class="solution-grid">
+    <div class="solution-card">
+      <div class="step">PASO 1</div>
+      <h3>Chatbot vendedor 24/7</h3>
+      <p>Un asistente AI que responde al instante por WhatsApp, Instagram o tu web. Califica leads, responde dudas y agenda citas — mientras duermes.</p>
+    </div>
+    <div class="solution-card">
+      <div class="step">PASO 2</div>
+      <h3>Seguimiento automático</h3>
+      <p>Nunca más se te olvida un cliente. El sistema hace follow-up inteligente en el momento perfecto.</p>
+    </div>
+    <div class="solution-card">
+      <div class="step">PASO 3</div>
+      <h3>Dashboard de ventas</h3>
+      <p>Ves todo: cuántos leads, conversiones, qué canal funciona mejor. Datos reales para decidir bien.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section reveal">
+  <h2>📈 Resultados que puedes esperar</h2>
+  <div class="results">
+    <div class="result-item">
+      <div class="number">3x</div>
+      <div class="label">Velocidad de respuesta</div>
+    </div>
+    <div class="result-item">
+      <div class="number">40%</div>
+      <div class="label">Más conversiones</div>
+    </div>
+    <div class="result-item">
+      <div class="number">24/7</div>
+      <div class="label">Tu negocio vendiendo</div>
+    </div>
+  </div>
+</div>
+
+<div class="section reveal">
+  <h2>💰 Planes</h2>
+  <div class="pricing">
+    <div class="price-card">
+      <h3>Semilla 🌱</h3>
+      <div class="price">$297<span>USD /mes</span></div>
+      <ul>
+        <li>Chatbot WhatsApp o Instagram</li>
+        <li>Respuestas automáticas 24/7</li>
+        <li>Hasta 500 conversaciones/mes</li>
+        <li>Setup incluido</li>
+        <li>Soporte por chat</li>
+      </ul>
+      <a href="#contacto" class="cta-btn">Empezar</a>
+    </div>
+    <div class="price-card featured">
+      <h3>Crecimiento ☀️</h3>
+      <div class="price">$597<span>USD /mes</span></div>
+      <ul>
+        <li>Todo de Semilla +</li>
+        <li>Multi-canal (WhatsApp + IG + Web)</li>
+        <li>Seguimiento automático</li>
+        <li>CRM con AI integrado</li>
+        <li>Dashboard de métricas</li>
+        <li>Llamada mensual de estrategia</li>
+      </ul>
+      <a href="#contacto" class="cta-btn">Empezar</a>
+    </div>
+    <div class="price-card">
+      <h3>Expansión 🚀</h3>
+      <div class="price">Custom</div>
+      <ul>
+        <li>Todo de Crecimiento +</li>
+        <li>Agente AI de voz</li>
+        <li>Integraciones personalizadas</li>
+        <li>Entrenamiento a tu equipo</li>
+        <li>Soporte prioritario</li>
+      </ul>
+      <a href="#contacto" class="cta-btn">Hablemos</a>
+    </div>
+  </div>
+</div>
+
+<div class="section reveal">
+  <h2>🧠 ¿Por qué Solai?</h2>
+  <div class="about-box">
+    <div class="quote">"Si el cliente siente que le vendieron, no vuelve. Si cree que él compró, vuelve siempre."</div>
+    <p>No somos una agencia de marketing genérica. Somos vendedores que entienden AI. Cada sistema que implementamos está diseñado para vender como tú vendes — con conexión real, no spam robótico.</p>
+    <br>
+    <p>Fundado por alguien que ha vendido en 6 industrias diferentes, desde dulces hasta vuelos internacionales. Sabemos lo que funciona porque lo hemos hecho.</p>
+  </div>
+</div>
+
+<div class="section reveal" id="contacto">
+  <h2>📩 Hablemos</h2>
+  <form class="contact-form" id="contactForm" onsubmit="submitForm(event)">
+    <input type="text" name="nombre" placeholder="Tu nombre" required>
+    <input type="text" name="negocio" placeholder="Tu negocio / qué vendes" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="tel" name="whatsapp" placeholder="WhatsApp (con código de país)">
+    <select name="plan">
+      <option value="">¿Qué plan te interesa?</option>
+      <option value="semilla">🌱 Semilla — $297/mes</option>
+      <option value="crecimiento">☀️ Crecimiento — $597/mes</option>
+      <option value="expansion">🚀 Expansión — Custom</option>
+      <option value="nosesabe">No estoy seguro</option>
+    </select>
+    <textarea name="mensaje" placeholder="Cuéntanos sobre tu negocio y qué necesitas..."></textarea>
+    <button type="submit" class="cta-btn">Enviar mensaje ☀️</button>
+  </form>
+  <div class="form-success" id="formSuccess">
+    <div style="font-size:3em;margin-bottom:16px">☀️</div>
+    <div>¡Recibido! Te contactamos en menos de 24 horas.</div>
+  </div>
+</div>
+
+<footer>
+  <p>☀️ Solai — Ayudamos a los pequeños a ser grandes</p>
+  <p style="margin-top:8px">© 2026 Solai. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, { threshold: 0.15 });
+reveals.forEach(el => observer.observe(el));
+
+// Form (stores locally for MVP, no backend yet)
+function submitForm(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const data = Object.fromEntries(fd);
+  data.timestamp = new Date().toISOString();
+  
+  // Store locally
+  const leads = JSON.parse(localStorage.getItem('solai_leads') || '[]');
+  leads.push(data);
+  localStorage.setItem('solai_leads', JSON.stringify(leads));
+  
+  // Show success
+  e.target.style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+  
+  console.log('New lead:', data);
+}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
