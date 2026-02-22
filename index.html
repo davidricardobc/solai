@@ -293,6 +293,26 @@ footer {
 footer p { color: var(--gray-600); font-size: 0.8em; }
 footer a { color: var(--gray-500); text-decoration: none; }
 
+/* FAQ */
+.faq-item { border-bottom: 1px solid var(--dark-border); }
+.faq-q {
+  width: 100%; background: none; border: none; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 0; color: var(--white); font-size: 1em; font-weight: 600;
+  font-family: inherit; text-align: left; transition: color 0.2s;
+}
+.faq-q:hover { color: var(--gold); }
+.faq-arrow {
+  font-size: 1.4em; color: var(--gold); transition: transform 0.3s;
+  flex-shrink: 0; margin-left: 16px;
+}
+.faq-item.open .faq-arrow { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease;
+}
+.faq-item.open .faq-a { max-height: 200px; padding-bottom: 20px; }
+.faq-a p { color: var(--gray-400); font-size: 0.95em; line-height: 1.7; }
+
 /* Scroll Reveal */
 .reveal { opacity: 0; transform: translateY(24px); transition: all 0.7s cubic-bezier(0.16,1,0.3,1); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -584,6 +604,60 @@ footer a { color: var(--gray-500); text-decoration: none; }
   </div>
 </section>
 
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container text-center">
+    <div class="reveal">
+      <span class="section-label">Preguntas frecuentes</span>
+      <h2 class="section-title">Todo lo que necesitas saber</h2>
+    </div>
+    <div class="faq-list reveal" style="max-width:700px;margin:40px auto 0;text-align:left;">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>¿Necesito saber de tecnología para usar Solai?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a"><p>No. Nosotros nos encargamos de todo: configuración, entrenamiento del chatbot y conexión con tus canales. Tú solo necesitas contarnos cómo vendes y qué preguntas te hacen tus clientes.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>¿Cuánto tarda en estar listo?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a"><p>48 horas desde que nos das la información de tu negocio. En casos más complejos (integraciones custom), puede tomar hasta una semana.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>¿El chatbot suena como un robot?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a"><p>No. Usamos inteligencia artificial avanzada que habla como una persona real. Lo entrenamos con tu tono, tu vocabulario y tu estilo de venta. Tus clientes no van a notar la diferencia.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>¿Puedo cancelar cuando quiera?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a"><p>Sí. Sin contratos largos, sin penalidades. Si no ves resultados, cancelas y ya. Creemos que la mejor retención es un buen servicio, no un contrato.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>¿Qué pasa si el chatbot no sabe responder algo?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a"><p>Escala automáticamente a ti o a tu equipo. El bot sabe cuándo no puede resolver algo y transfiere la conversación sin que el cliente sienta la transición.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span>¿Funciona con WhatsApp personal o necesito Business?</span>
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a"><p>Usamos la API oficial de WhatsApp Business. Necesitas un número dedicado (puede ser uno nuevo). Nosotros te ayudamos con toda la configuración.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA + Form -->
 <section class="cta-section" id="contacto">
   <div class="cta-glow"></div>
@@ -651,6 +725,14 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
+
+// FAQ toggle
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
 
 // Mobile menu
 const hamburger = document.getElementById('hamburger');
