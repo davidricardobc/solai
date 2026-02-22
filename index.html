@@ -293,6 +293,36 @@ footer {
 footer p { color: var(--gray-600); font-size: 0.8em; }
 footer a { color: var(--gray-500); text-decoration: none; }
 
+/* Demo Mockup */
+.demo-preview { perspective: 1000px; }
+.demo-mockup {
+  background: var(--dark-card); border: 1px solid var(--dark-border);
+  border-radius: 20px; overflow: hidden; max-width: 380px; margin: 0 auto;
+  transform: rotateY(-2deg) rotateX(2deg);
+  transition: transform 0.4s;
+}
+.demo-mockup:hover { transform: rotateY(0) rotateX(0); }
+.demo-header-mock {
+  padding: 14px 16px; background: rgba(255,255,255,0.02);
+  border-bottom: 1px solid var(--dark-border);
+}
+.demo-messages { padding: 20px 16px; display: flex; flex-direction: column; gap: 12px; }
+.demo-msg {
+  padding: 10px 14px; border-radius: 12px; font-size: 0.88em; line-height: 1.5;
+  max-width: 85%; animation: fadeUp 0.5s ease both;
+}
+.demo-msg.bot {
+  background: rgba(245,166,35,0.08); color: var(--gray-300);
+  border-bottom-left-radius: 4px; align-self: flex-start;
+}
+.demo-msg.user {
+  background: rgba(37,211,102,0.12); color: var(--gray-300);
+  border-bottom-right-radius: 4px; align-self: flex-end;
+}
+.demo-msg:nth-child(2) { animation-delay: 0.15s; }
+.demo-msg:nth-child(3) { animation-delay: 0.3s; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
 /* WhatsApp Float */
 .wa-float {
   position: fixed; bottom: 24px; right: 24px; z-index: 100;
@@ -391,9 +421,11 @@ footer a { color: var(--gray-500); text-decoration: none; }
   <div class="container">
     <div class="nav-logo">☀️ <span>Solai</span></div>
     <div class="nav-links">
+      <a href="#demo-section">Demo</a>
       <a href="#problema">Problema</a>
       <a href="#solucion">Solución</a>
       <a href="#planes">Planes</a>
+      <a href="#faq">FAQ</a>
       <a href="#contacto" class="nav-cta">Agendar demo</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Menú">
@@ -499,6 +531,40 @@ footer a { color: var(--gray-500); text-decoration: none; }
         <div class="step-number">03</div>
         <h3>Panel de control</h3>
         <p>Ves todo en tiempo real: leads, conversiones, qué canal funciona mejor. Datos reales para tomar decisiones inteligentes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Demo Section -->
+<section class="section" id="demo-section">
+  <div class="container text-center">
+    <div class="reveal">
+      <span class="section-label">Demo en vivo</span>
+      <h2 class="section-title">Míralo en acción</h2>
+      <p class="section-desc">Prueba nuestro chatbot vendedor de Empire Essence. Así funciona Solai para un negocio real.</p>
+    </div>
+    <div class="reveal" style="max-width:700px;margin:0 auto;">
+      <div class="demo-preview">
+        <div class="demo-mockup">
+          <div class="demo-header-mock">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:36px;height:36px;background:rgba(245,166,35,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.9em;">👑</div>
+              <div>
+                <div style="color:var(--white);font-weight:600;font-size:0.9em;">Alex — Empire Essence</div>
+                <div style="color:#25D366;font-size:0.75em;">● En línea</div>
+              </div>
+            </div>
+          </div>
+          <div class="demo-messages">
+            <div class="demo-msg bot">¡Hola! 😊 Soy Alex, tu asesor de fragancias. ¿Buscas algo especial?</div>
+            <div class="demo-msg user">Busco algo para una cita</div>
+            <div class="demo-msg bot">Perfecto 😏 Para una cita te recomiendo <strong>Seducción</strong> — tiene notas de vainilla y ámbar que crean una estela irresistible. ¿Te cuento más?</div>
+          </div>
+          <div style="padding:16px;text-align:center;">
+            <a href="./demo/" class="btn-primary" style="font-size:0.9em;">Probar demo en vivo →</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
