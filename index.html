@@ -293,6 +293,21 @@ footer {
 footer p { color: var(--gray-600); font-size: 0.8em; }
 footer a { color: var(--gray-500); text-decoration: none; }
 
+/* ROI Slider */
+.roi-slider {
+  width: 100%; height: 6px; -webkit-appearance: none; appearance: none;
+  background: var(--dark-border); border-radius: 3px; outline: none;
+}
+.roi-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 22px; height: 22px;
+  background: var(--gold); border-radius: 50%; cursor: pointer;
+  box-shadow: 0 0 12px rgba(245,166,35,0.3);
+}
+.roi-slider::-moz-range-thumb {
+  width: 22px; height: 22px; background: var(--gold);
+  border-radius: 50%; cursor: pointer; border: none;
+}
+
 /* FAQ */
 .faq-item { border-bottom: 1px solid var(--dark-border); }
 .faq-q {
@@ -542,6 +557,49 @@ footer a { color: var(--gray-500); text-decoration: none; }
   </div>
 </div>
 
+<!-- ROI Calculator -->
+<section class="section" id="roi" style="background: linear-gradient(180deg, var(--dark) 0%, rgba(245,166,35,0.02) 50%, var(--dark) 100%);">
+  <div class="container text-center">
+    <div class="reveal">
+      <span class="section-label">Calculadora</span>
+      <h2 class="section-title">¿Cuánto estás perdiendo?</h2>
+      <p class="section-desc">Ajusta los números de tu negocio y mira el impacto de responder al instante.</p>
+    </div>
+    <div class="roi-calc reveal" style="max-width:560px;margin:0 auto;">
+      <div style="display:grid;gap:20px;text-align:left;">
+        <div>
+          <label style="color:var(--gray-400);font-size:0.85em;display:block;margin-bottom:6px;">Leads / mensajes por mes</label>
+          <input type="range" id="roiLeads" min="10" max="500" value="100" class="roi-slider" oninput="calcROI()">
+          <div style="display:flex;justify-content:space-between;color:var(--gray-500);font-size:0.8em;"><span>10</span><span id="roiLeadsVal" style="color:var(--gold);font-weight:700;font-size:1.1em;">100</span><span>500</span></div>
+        </div>
+        <div>
+          <label style="color:var(--gray-400);font-size:0.85em;display:block;margin-bottom:6px;">Ticket promedio (USD)</label>
+          <input type="range" id="roiTicket" min="10" max="500" value="50" class="roi-slider" oninput="calcROI()">
+          <div style="display:flex;justify-content:space-between;color:var(--gray-500);font-size:0.8em;"><span>$10</span><span id="roiTicketVal" style="color:var(--gold);font-weight:700;font-size:1.1em;">$50</span><span>$500</span></div>
+        </div>
+        <div>
+          <label style="color:var(--gray-400);font-size:0.85em;display:block;margin-bottom:6px;">Tasa de conversión actual (%)</label>
+          <input type="range" id="roiConv" min="1" max="30" value="5" class="roi-slider" oninput="calcROI()">
+          <div style="display:flex;justify-content:space-between;color:var(--gray-500);font-size:0.8em;"><span>1%</span><span id="roiConvVal" style="color:var(--gold);font-weight:700;font-size:1.1em;">5%</span><span>30%</span></div>
+        </div>
+      </div>
+      <div class="roi-results" style="margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div style="background:var(--dark-card);border:1px solid var(--dark-border);border-radius:var(--radius);padding:24px;">
+          <div style="color:var(--gray-500);font-size:0.8em;margin-bottom:4px;">Sin Solai</div>
+          <div id="roiWithout" style="font-size:1.8em;font-weight:900;color:var(--gray-400);">$250</div>
+          <div style="color:var(--gray-600);font-size:0.75em;">/ mes en ventas</div>
+        </div>
+        <div style="background:var(--dark-card);border:1px solid var(--gold);border-radius:var(--radius);padding:24px;">
+          <div style="color:var(--gold);font-size:0.8em;margin-bottom:4px;">Con Solai ☀️</div>
+          <div id="roiWith" style="font-size:1.8em;font-weight:900;color:var(--white);">$700</div>
+          <div style="color:var(--gray-500);font-size:0.75em;">/ mes en ventas</div>
+        </div>
+      </div>
+      <div id="roiExtra" style="margin-top:16px;color:var(--gold);font-size:1.1em;font-weight:700;">+$450/mes en ventas adicionales</div>
+    </div>
+  </div>
+</section>
+
 <!-- Quote -->
 <div class="quote-section reveal">
   <div class="quote-mark">"</div>
@@ -725,6 +783,23 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
+
+// ROI Calculator
+function calcROI() {
+  const leads = +document.getElementById('roiLeads').value;
+  const ticket = +document.getElementById('roiTicket').value;
+  const conv = +document.getElementById('roiConv').value;
+  document.getElementById('roiLeadsVal').textContent = leads;
+  document.getElementById('roiTicketVal').textContent = '$' + ticket;
+  document.getElementById('roiConvVal').textContent = conv + '%';
+  const without = Math.round(leads * (conv/100) * ticket);
+  const withSolai = Math.round(leads * ((conv * 2.8)/100) * ticket);
+  const extra = withSolai - without;
+  document.getElementById('roiWithout').textContent = '$' + without.toLocaleString();
+  document.getElementById('roiWith').textContent = '$' + withSolai.toLocaleString();
+  document.getElementById('roiExtra').textContent = '+$' + extra.toLocaleString() + '/mes en ventas adicionales';
+}
+calcROI();
 
 // FAQ toggle
 function toggleFaq(btn) {
